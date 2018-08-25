@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
 
+  get '/top_commenters', to: 'home#top_commenters'
+
   root "home#welcome"
   resources :genres, only: :index do
     member do
