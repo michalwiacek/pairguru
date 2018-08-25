@@ -14,7 +14,7 @@ class PairguruAdapter
     path = URI.escape("/api/v1/movies/#{title}")
     result = fetch_resource(path)
     if result
-      JSON.parse(result)
+      JSON.parse(result.body).dig('data','attributes')
     else
       {}
     end
