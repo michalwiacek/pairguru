@@ -1,0 +1,12 @@
+.row
+  .col-md-6.col-md-offset-3
+    %h1.text-center Top Commenters
+    %table.table
+      %thead
+        %tr
+          %th Name
+          %th Number of comments
+      - @top_commenters.each do |user, comments_count|
+        %tr
+          %td= user.name
+          %td= comments_count
