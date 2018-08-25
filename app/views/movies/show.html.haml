@@ -13,3 +13,27 @@
       %p= @movie.description
 - if user_signed_in?
   %p= link_to 'Email me details about this movie', send_info_movie_path(@movie), class: 'btn btn-sm btn-default', remote: true
+
+
+.panel
+  .panel-default
+    .panel-heading
+      %h3.panel-title Comments
+    .panel-body
+      %table.table
+        - @comments.each do |comment|
+          %tr
+            %td
+              - if user_signed_in? && comment.user == current_user
+                .pull-right= link_to 'Delete', movie_comment_path(@movie, comment), method: :delete
+              %p= comment.text
+              .small= 'posted by ' + comment.user.name + ', ' + time_ago_in_words(comment.created_at) + ' ago'
+    
+    - unless !user_signed_in? && user_commented_movie?(@movie)
+      .panel-footer
+        = form_for [@movie, @comment] do |f|
+          .row
+            .col-md-11
+              = f.text_field :text, placeholder: 'Add new comment', class: 'form-control'
+            .col-md-1
+              = f.submit 'Add', class: 'btn btn-default btn-block'
