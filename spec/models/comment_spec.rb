@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-RSpec.describe Comment, type: :model do
+describe Comment, type: :model do
   let(:movie) {create :movie}
   let(:comment) {create :comment}
 
@@ -12,6 +12,6 @@ RSpec.describe Comment, type: :model do
   it {expect(comment).to validate_presence_of(:text)}
 
   it {expect(comment).to belong_to(:user)}
-  it {expect(comment).to belong_to(:move)}
+  it {expect(comment).to belong_to(:movie)}
 
 end
